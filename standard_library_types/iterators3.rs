@@ -73,7 +73,7 @@ mod tests {
     fn result_with_list() {
         let numbers = vec![27, 297, 38502, 81];
         let division_results = numbers.into_iter().map(|n| divide(n, 27));
-        let x = division_results.collect::<Result<Vec<i32>, DivisionError>>(); // 玄学，<Result<Vec<i32>, Vec<DivisionError>>> 又不能跑
+        let x = division_results.collect::<Result<Vec<i32>, DivisionError>>(); // 玄学，<Result<Vec<i32>, Vec<DivisionError>>> 又不能跑 // 其实非常合理，针对的就是如果全 Ok 就收集放进 Vec<T> 若有 Err 就返回 Err 的场景，不然 Result<Vec<T>, Vec<U>> 的话也没法处理一堆 Ok 和 Err 混在一起的情况.
         assert_eq!(format!("{:?}", x), "Ok([1, 11, 1426, 3])");
     }
 
